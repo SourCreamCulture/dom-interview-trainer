@@ -234,6 +234,7 @@ function toggleSolution() {
 // ── Sandbox ─────────────────────────────────────────────────
 function resetSandbox() {
   if (!current) return;
+  try { if (els.sandbox.contentWindow) els.sandbox.contentWindow.__SANDBOX_READY__ = false; } catch (e) { /* cross-origin */ }
   const srcdoc = `<!doctype html>
 <html><head><meta charset="utf-8" /><title>Sandbox</title></head>
 <body>
@@ -283,6 +284,7 @@ async function runTestsIsolated(userCode) {
     els.testProgress.textContent = `Running test ${i + 1} / ${current.tests.length}...`;
 
     resetSandbox();
+    await new Promise(r => setTimeout(r, 50));
     try {
       await waitForIframeReady(els.sandbox);
     } catch (err) {
