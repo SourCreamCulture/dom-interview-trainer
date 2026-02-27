@@ -8,79 +8,125 @@
 </head>
 <body>
   <header class="top">
-    <div>
+    <div class="top-left">
       <h1>DOM Interview Trainer</h1>
-      <div class="sub">Practice manipulating the DOM with JavaScript. Type real code. Run. Get instant feedback.</div>
+      <div class="sub">Master DOM manipulation for coding interviews</div>
     </div>
-    <div class="actions">
-      <button id="newChallengeBtn" class="primary">New challenge</button>
-      <button id="resetBtn">Reset</button>
-      <button id="revealBtn" class="warn">Reveal solution</button>
+    <div class="top-center">
+      <div class="stats-bar">
+        <span class="stat" id="statText">0 / 0 solved</span>
+        <div class="progress-track"><div id="progressFill" class="progress-fill"></div></div>
+      </div>
+    </div>
+    <div class="top-right">
+      <div class="timer-controls">
+        <select id="timerSelect" title="Timer duration">
+          <option value="0">No timer</option>
+          <option value="300">5 min</option>
+          <option value="600">10 min</option>
+          <option value="900">15 min</option>
+          <option value="1200">20 min</option>
+          <option value="1800">30 min</option>
+        </select>
+        <span id="timerDisplay" class="timer-display">--:--</span>
+        <button id="timerToggleBtn" class="sm" title="Start / Pause timer">Start</button>
+        <button id="timerResetBtn" class="sm" title="Reset timer">Reset</button>
+      </div>
     </div>
   </header>
 
-  <main class="grid">
-    <section class="card">
-      <h2>Challenge</h2>
-      <div id="challengeMeta" class="meta"></div>
-      <div id="prompt" class="prompt"></div>
-
-      <details class="hint">
-        <summary>Hint(s)</summary>
-        <div id="hints"></div>
-      </details>
-
-      <details class="hint">
-        <summary>Required HTML (already in the sandbox page)</summary>
-        <pre id="htmlStub" class="code"></pre>
-      </details>
-
-      <details class="hint">
-        <summary>Starter code</summary>
-        <pre id="starter" class="code"></pre>
-      </details>
-
-      <details class="hint" id="solutionWrap" hidden>
-        <summary>Solution</summary>
-        <pre id="solution" class="code"></pre>
-      </details>
-    </section>
-
-    <section class="card">
-      <div class="row">
-        <h2>Your code</h2>
-        <div class="row-actions">
-          <button id="runBtn" class="primary">Run (Ctrl/⌘ + Enter)</button>
-          <button id="formatBtn">Format (basic)</button>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-head">
+        <h2>Challenges</h2>
+        <button id="sidebarToggle" class="sidebar-toggle" title="Toggle sidebar">&laquo;</button>
+      </div>
+      <div class="sidebar-filters">
+        <input id="searchChallenges" type="text" placeholder="Search..." class="search-input" />
+        <div class="filter-row">
+          <select id="difficultyFilter">
+            <option value="all">All levels</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+          <select id="categoryFilter">
+            <option value="all">All categories</option>
+          </select>
         </div>
       </div>
-      <textarea id="editor" spellcheck="false"></textarea>
-      <div class="small">Tip: write code exactly like you would in the interview. You have full access to <code>document</code> in the sandbox.</div>
+      <div id="challengeList" class="challenge-list"></div>
+    </aside>
 
-      <div class="row" style="margin-top:14px;">
-        <h2>Results</h2>
-      </div>
-      <div id="results" class="results"></div>
-    </section>
-
-    <section class="card">
-      <div class="row">
-        <h2>Sandbox page (what your code manipulates)</h2>
-        <div class="row-actions">
-          <button id="rerunTestsBtn">Re-run tests</button>
-          <button id="openSandboxBtn">Pop out</button>
+    <main class="main-content" id="mainContent">
+      <section class="card challenge-card">
+        <div class="challenge-header">
+          <h2 id="challengeTitle">Challenge</h2>
+          <div class="badge-row">
+            <span id="diffBadge" class="badge diff-easy">easy</span>
+            <span id="catBadge" class="badge cat-badge">data</span>
+          </div>
         </div>
-      </div>
-      <iframe id="sandbox" class="sandbox" title="Sandbox"></iframe>
-      <div class="small">Your code runs in the iframe above. Each run resets the page state.</div>
-    </section>
-  </main>
+        <div id="challengeMeta" class="meta"></div>
+        <div id="prompt" class="prompt"></div>
+
+        <details class="hint">
+          <summary>Hint(s)</summary>
+          <div id="hints"></div>
+        </details>
+        <details class="hint">
+          <summary>Required HTML (already in the sandbox page)</summary>
+          <pre id="htmlStub" class="code"></pre>
+        </details>
+        <details class="hint">
+          <summary>Starter code</summary>
+          <pre id="starter" class="code"></pre>
+        </details>
+        <details class="hint" id="solutionWrap" hidden>
+          <summary>Solution</summary>
+          <pre id="solution" class="code"></pre>
+        </details>
+      </section>
+
+      <section class="card editor-card">
+        <div class="row">
+          <h2>Your code</h2>
+          <div class="row-actions">
+            <button id="runBtn" class="primary">Run (Ctrl+Enter)</button>
+            <button id="formatBtn">Format</button>
+            <button id="resetBtn">Reset</button>
+            <button id="revealBtn" class="warn">Reveal</button>
+          </div>
+        </div>
+        <textarea id="editor" spellcheck="false"></textarea>
+        <div class="small">Tip: write code exactly like you would in the interview. You have full access to <code>document</code> in the sandbox.</div>
+
+        <div class="row" style="margin-top:14px">
+          <h2>Results</h2>
+          <span id="testProgress" class="test-progress"></span>
+        </div>
+        <div id="results" class="results"></div>
+        <div id="nextWrap" class="next-wrap" hidden>
+          <button id="nextBtn" class="primary">Next unsolved challenge &rarr;</button>
+        </div>
+      </section>
+
+      <section class="card sandbox-card">
+        <div class="row">
+          <h2>Sandbox page</h2>
+          <div class="row-actions">
+            <button id="rerunTestsBtn">Re-run</button>
+            <button id="openSandboxBtn">Pop out</button>
+          </div>
+        </div>
+        <iframe id="sandbox" class="sandbox" title="Sandbox"></iframe>
+        <div class="small">Your code runs in the iframe above. Each test resets the sandbox for isolation.</div>
+      </section>
+    </main>
+  </div>
 
   <footer class="foot">
-    <div>
-      <strong>How this works:</strong> a challenge defines an HTML stub + a few tests. We reset the iframe, inject the stub, then run your JS.
-      If tests fail, you get a diff-ish message.
-    </div>
+    <div>Your progress is saved automatically. Pick challenges from the sidebar or click <strong>Next unsolved</strong> after solving one.</div>
   </footer>
 
   <script type="module" src="./app.js"></script>
