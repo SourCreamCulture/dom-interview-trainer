@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DOM Interview Trainer</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>DOM Interview Trainer</h1>
+      <div class="sub">Practice manipulating the DOM with JavaScript. Type real code. Run. Get instant feedback.</div>
+    </div>
+    <div class="actions">
+      <button id="newChallengeBtn" class="primary">New challenge</button>
+      <button id="resetBtn">Reset</button>
+      <button id="revealBtn" class="warn">Reveal solution</button>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="card">
+      <h2>Challenge</h2>
+      <div id="challengeMeta" class="meta"></div>
+      <div id="prompt" class="prompt"></div>
+
+      <details class="hint">
+        <summary>Hint(s)</summary>
+        <div id="hints"></div>
+      </details>
+
+      <details class="hint">
+        <summary>Required HTML (already in the sandbox page)</summary>
+        <pre id="htmlStub" class="code"></pre>
+      </details>
+
+      <details class="hint">
+        <summary>Starter code</summary>
+        <pre id="starter" class="code"></pre>
+      </details>
+
+      <details class="hint" id="solutionWrap" hidden>
+        <summary>Solution</summary>
+        <pre id="solution" class="code"></pre>
+      </details>
+    </section>
+
+    <section class="card">
+      <div class="row">
+        <h2>Your code</h2>
+        <div class="row-actions">
+          <button id="runBtn" class="primary">Run (Ctrl/⌘ + Enter)</button>
+          <button id="formatBtn">Format (basic)</button>
+        </div>
+      </div>
+      <textarea id="editor" spellcheck="false"></textarea>
+      <div class="small">Tip: write code exactly like you would in the interview. You have full access to <code>document</code> in the sandbox.</div>
+
+      <div class="row" style="margin-top:14px;">
+        <h2>Results</h2>
+      </div>
+      <div id="results" class="results"></div>
+    </section>
+
+    <section class="card">
+      <div class="row">
+        <h2>Sandbox page (what your code manipulates)</h2>
+        <div class="row-actions">
+          <button id="rerunTestsBtn">Re-run tests</button>
+          <button id="openSandboxBtn">Pop out</button>
+        </div>
+      </div>
+      <iframe id="sandbox" class="sandbox" title="Sandbox"></iframe>
+      <div class="small">Your code runs in the iframe above. Each run resets the page state.</div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div>
+      <strong>How this works:</strong> a challenge defines an HTML stub + a few tests. We reset the iframe, inject the stub, then run your JS.
+      If tests fail, you get a diff-ish message.
+    </div>
+  </footer>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
