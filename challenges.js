@@ -61,7 +61,7 @@ function add() {
     return;
   }
   numbers.push(n);
-  status.textContent = `Added \${n}. Count: \${numbers.length}`;
+  status.textContent = 'Added ' + n + '. Count: ' + numbers.length;
   input.value = '';
   input.focus();
 }
@@ -178,7 +178,7 @@ btn.addEventListener('click', () => {
 
   error.textContent = '';
   numbers.push(n);
-  line.textContent = `Numbers: \${numbers.join(', ')}`;
+  line.textContent = 'Numbers: ' + numbers.join(', ');
   input.value = '';
   input.focus();
 });
@@ -276,7 +276,7 @@ function add() {
     return;
   }
   numbers.push(n);
-  log.textContent = `Log: \${numbers.join(' | ')}`;
+  log.textContent = 'Log: ' + numbers.join(' | ');
   input.value = '';
   input.focus();
 }
@@ -367,7 +367,7 @@ btn.addEventListener('click', () => {
     return;
   }
   numbers.push(n);
-  out.textContent = `You entered: \${JSON.stringify(numbers)}`;
+  out.textContent = 'You entered: ' + JSON.stringify(numbers);
   input.value = '';
   input.focus();
 });
@@ -464,7 +464,7 @@ const list = document.querySelector('#list');
 
 function render() {
   const sum = numbers.reduce((a, b) => a + b, 0);
-  status.textContent = `Count: \${numbers.length} | Sum: \${sum}`;
+  status.textContent = 'Count: ' + numbers.length + ' | Sum: ' + sum;
 
   list.innerHTML = '';
   for (const n of numbers) {
